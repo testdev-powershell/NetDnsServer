@@ -15,7 +15,7 @@ pipeline {
 
     stage('Step Module Manifest (patch)') {
       steps {
-        bat 'powershell.exe -Command "Import-Module \'C:\\Program Files\\WindowsPowerShell\\Modules\\BuildHelpers\'; Step-ModuleVersion -Path C:\\testdev-powershell_GIT\\NetDnsServer\\NetDnsServer\\NetDnsServer.psd1 -By Patch"'
+        bat 'powershell.exe -Command "Import-Module \'C:\\Program Files\\WindowsPowerShell\\Modules\\BuildHelpers\'; Step-ModuleVersion -Path C:\\testdev-powershell_GIT\\NetDnsServer\\NetDnsServer\\NetDnsServer.psd1 -By Build"'
       }
     }
 
