@@ -15,11 +15,11 @@ pipeline {
 	
 			stage('Testing PSRepo') {
 				steps {
-					powerShell('''
+					powershell("""
 						if (!(Get-PSRepository -Name PStdev)) {
-							Register-PSRepository -Name PStdev -SourceLocation 'http://192.168.1.211:8624/nuget/PStdev/' -PublishLocation 'http://192.168.1.211:8624/nuget/PStdev/' -InstallationPolicy Trusted 
+						Register-PSRepository -Name PStdev -SourceLocation 'http://192.168.1.211:8624/nuget/PStdev/' -PublishLocation 'http://192.168.1.211:8624/nuget/PStdev/' -InstallationPolicy Trusted 
 						}
-					''')
+					""")
 					
 					powershell 'Get-PSRepository'
 				}
