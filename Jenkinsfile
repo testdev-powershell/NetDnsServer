@@ -12,15 +12,15 @@ pipeline {
 					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Test'
 				}
 			}
-
-			stage('Step Module Manifest (by Build)') {
-				steps {
-					bat 'powershell.exe -Command "Import-Module \'C:\\Program Files\\WindowsPowerShell\\Modules\\BuildHelpers\'; Step-ModuleVersion -Path C:\\testdev-powershell_GIT\\NetDnsServer\\NetDnsServer\\NetDnsServer.psd1 -By Build"'
-				}
-			}
 	
 			stage('Testing PSRepo') {
 				steps {
+					powershell('''
+						if (!(Get-PSRepository -Name PStdev)) {
+							Register-PSRepository -Name PStdev -SourceLocation 'http://192.168.1.211:8624/nuget/PStdev/' -PublishLocation 'http://192.168.1.211:8624/nuget/PStdev/' -InstallationPolicy Trusted 
+						}
+					''')
+					
 					powershell 'Get-PSRepository'
 				}
 			}
