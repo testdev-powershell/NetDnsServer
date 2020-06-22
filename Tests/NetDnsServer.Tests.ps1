@@ -1,4 +1,6 @@
-﻿Describe 'Basic Unit Test (Parameters)' {
+﻿Import-Module NetDnsServer
+
+Describe 'Basic Unit Test (Parameters)' {
     Context "Parameter Validation -- Query-NetDnsServer" {
         It "ComputerName parameter is mandatory" {
             (Get-Command -Name Query-NetDnsServer).Parameters.ComputerName.Attributes.Mandatory | Should -Be $true
