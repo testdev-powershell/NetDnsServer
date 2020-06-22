@@ -1,4 +1,4 @@
-﻿Deploy Module {
+﻿Deploy PStdev {
     By PSGalleryModule {
         FromSource $PSScriptRoot\..\NetDnsServer
         To PStdev

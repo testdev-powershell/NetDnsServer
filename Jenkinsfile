@@ -19,15 +19,9 @@ pipeline {
 				}
 			}
 	
-			stage('PROD: ProGet Deploy') {
+			stage('Testing PSRepo') {
 				steps {
-					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Deploy'
-				}
-			}
-			
-			stage('Local: ProGet Package Download') {
-				steps {
-					downloadProgetPackage downloadFolder: '${WORKSPACE}', downloadFormat: 'zip', feedName: 'PStdev', groupName: '', packageName: 'NetDnsServer', version: 'Latest'
+					powershell 'Get-PSRepository'
 				}
 			}
 
