@@ -32,7 +32,7 @@ pipeline {
 					// bat 'powershell.exe -Command "Import-PackageProvider -Name NuGet"'
 					bat 'powershell.exe -Command "Import-Module \'C:\\Program Files\\WindowsPowerShell\\Modules\\PowerShellGet\' -Force; \
 						Get-Module | select Name"; \
-						Copy-Item -Path 'C:\Program Files\PackageManagement\ProviderAssemblies\' -Destination $ENV:WORKSPACE -Recurse; \
+						Copy-Item -Path \'C:\\Program Files\\PackageManagement\\ProviderAssemblies\\\' -Destination $ENV:WORKSPACE -Recurse; \
 						ls; \
 						Import-PackageProvider "NuGet"'
 					// bat 'powershell.exe -Command "Get-Module"'
