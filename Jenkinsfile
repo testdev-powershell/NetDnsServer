@@ -30,10 +30,8 @@ pipeline {
 					bat 'powershell.exe -Command "Get-PackageProvider | select -ExpandProperty Name"'
 					// bat 'powershell.exe -Command "Copy-Item -Path \'C:\\Program Files\\PackageManagement\\ProviderAssemblies\\\' -Destination $ENV:WORKSPACE -Recurse"'
 					// bat 'powershell.exe -Command "Import-PackageProvider -Name NuGet"'
-					bat """
-						'powershell.exe -Command "Import-Module \'C:\\Program Files\\WindowsPowerShell\\Modules\\PowerShellGet\' -Force;`
-						Get-Module | select Name"'
-					"""
+					bat """'powershell.exe -Command "Import-Module \'C:\\Program Files\\WindowsPowerShell\\Modules\\PowerShellGet\' -Force; \
+						Get-Module | select Name"'"""
 					// bat 'powershell.exe -Command "Get-Module"'
 					// bat 'powershell.exe -Command "Get-PackageProvider | select -ExpandProperty Name"'
 					// bat 'powershell.exe -Command "Install-PackageProvider -Name "Nuget" -RequiredVersion "2.8.5.216" -Force"'
