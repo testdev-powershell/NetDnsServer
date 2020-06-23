@@ -18,7 +18,7 @@ pipeline {
 					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
 						sh 'git checkout testDEV'
 						sh 'git branch'
-						powershell 'Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -by Build'
+						// powershell 'Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -by Build'
 					}
 				}
 			}
@@ -26,6 +26,7 @@ pipeline {
 			stage('Deploy: ProGet') {
 				steps {
 					bat 'powershell.exe -Command "Get-Module"'
+					bat 'powershell.exe -Command "Get-PSRepository"'
 					// bat 'powershell.exe -Command "C:\\testdev-powershell_GIT\\NetDnsServer\\Build\\NetDnsServer_Build.ps1 -Task Deploy"'
 				}
 			}
