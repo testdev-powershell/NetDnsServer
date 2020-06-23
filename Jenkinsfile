@@ -14,9 +14,9 @@ pipeline {
 			}
 			
 			stage('Step Module Manifest (by Build)') {
-				when { branch testDEV}
 				steps {
 					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
+						sh 'git checkout testDEV'
 						sh 'git branch'
 					
 						// bat 'powershell.exe -Command "Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -By Build"'
