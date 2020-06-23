@@ -11,7 +11,6 @@ pipeline {
 					powershell '''
 						Install-PackageProvider NuGet -Force
 						Import-PackageProvider NuGet -Force
-						Register-PSRepository -Default -InstallationPolicy Trusted
 						Register-PSRepository -Name PStdev -SourceLocation \'http://192.168.1.211:8624/nuget/PStdev/\' -PublishLocation \'http://192.168.1.211:8624/nuget/PStdev/\' -InstallationPolicy Trusted
 						Get-PSRepository | select Name
 					'''
