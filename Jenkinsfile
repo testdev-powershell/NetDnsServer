@@ -31,8 +31,9 @@ pipeline {
 					// bat 'powershell.exe -Command "Copy-Item -Path \'C:\\Program Files\\PackageManagement\\ProviderAssemblies\\\' -Destination $ENV:WORKSPACE -Recurse"'
 					// bat 'powershell.exe -Command "Import-PackageProvider -Name NuGet"'
 					bat 'powershell.exe -Command "Import-Module \'C:\\Program Files\\WindowsPowerShell\\Modules\\PowerShellGet\' -Force; \
-						Register-PSRepository -Name \'PSGallery\' –SourceLocation \'https://www.powershellgallery.com/api/v2/\' -InstallationPolicy Trusted \
+						Register-PSRepository -Name \'PSGallery\' –SourceLocation \'https://www.powershellgallery.com/api/v2/\' -InstallationPolicy Trusted; \
 						Import-PackageProvider "NuGet"; \
+						Get-PSRepository; \
 						Get-PackageProvider | select -ExpandProperty Name'
 					// bat 'powershell.exe -Command "Get-Module"'
 					// bat 'powershell.exe -Command "Get-PackageProvider | select -ExpandProperty Name"'
