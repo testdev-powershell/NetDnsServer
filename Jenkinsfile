@@ -27,7 +27,7 @@ pipeline {
 				steps {
 					bat 'powershell.exe -Command "Get-Module"'
 					bat 'powershell.exe -Command "Get-PSRepository"'
-					bat 'powershell.exe -Command "Import-Module \'C:\\Program Files\\WindowsPowerShell\\Modules\\NuGet\' -WarningAction Ignore; Register-PSRepository -Name PStdev -SourceLocation \'http://192.168.1.211:8624/nuget/PStdev/\' -PublishLocation \'http://192.168.1.211:8624/nuget/PStdev/\' -InstallationPolicy Trusted"'
+					bat 'powershell.exe -Command "Get-PackageProvider"'
 					// bat 'powershell.exe -Command "Register-PSRepository -Name PStdev -SourceLocation \'http://192.168.1.211:8624/nuget/PStdev/\' -PublishLocation \'http://192.168.1.211:8624/nuget/PStdev/\' -InstallationPolicy Trusted"'
 					bat 'powershell.exe -Command "Get-PSRepository"'
 					// bat 'powershell.exe -Command "C:\\testdev-powershell_GIT\\NetDnsServer\\Build\\NetDnsServer_Build.ps1 -Task Deploy"'
