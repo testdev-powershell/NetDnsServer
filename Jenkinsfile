@@ -12,6 +12,12 @@ pipeline {
 					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Test'
 				}
 			}
+			
+			stage('Step Module Manifest (by Build)') {
+				steps {
+					bat 'powershell.exe -Command "Import-Module \'C:\\Program Files\\WindowsPowerShell\\Modules\\BuildHelpers\'; Step-ModuleVersion -Path $ENV:WORKSPACE\\NetDnsServer\\NetDnsServer.psd1 -By Build"'
+				}
+			}
 	
 			stage('Testing PSRepo') {
 				steps {
