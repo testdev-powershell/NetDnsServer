@@ -24,6 +24,15 @@ pipeline {
 					// bat 'powershell.exe -Command "Register-PSRepository -Name PStdev -SourceLocation \'http://192.168.1.211:8624/nuget/PStdev/\' -PublishLocation \'http://192.168.1.211:8624/nuget/PStdev/\' -InstallationPolicy Trusted"'
 					// bat 'powershell.exe -Command "Get-PSRepository"'
 					// bat 'powershell.exe -Command "C:\\testdev-powershell_GIT\\NetDnsServer\\Build\\NetDnsServer_Build.ps1 -Task Deploy"'
+					powershell '''
+						Get-PSRepository | select Name
+					'''
+				}
+			}
+			
+			stage ('Test of previous Stage') {
+				steps {
+					powershell 'Get-PSRepository | select Name'
 				}
 			}
 		}
