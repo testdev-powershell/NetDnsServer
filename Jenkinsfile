@@ -30,6 +30,8 @@ pipeline {
 					bat 'powershell.exe -Command "Get-PackageProvider | select -ExpandProperty Name"'
 					bat 'powershell.exe -Command "Copy-Item -Path \'C:\\Program Files\\PackageManagement\\ProviderAssemblies\\\' -Destination $ENV:WORKSPACE -Recurse"'
 					powershell 'ls'
+					bat 'powershell.exe -Command "Import-PackageProvider -Name NuGet"'
+					bat 'powershell.exe -Command "Get-PackageProvider | select -ExpandProperty Name"'
 					// bat 'powershell.exe -Command "Install-PackageProvider -Name "Nuget" -RequiredVersion "2.8.5.216" -Force"'
 					// bat 'powershell.exe -Command "Get-PackageProvider | select -ExpandProperty Name"'
 					// bat 'powershell.exe -Command "Register-PSRepository -Name PStdev -SourceLocation \'http://192.168.1.211:8624/nuget/PStdev/\' -PublishLocation \'http://192.168.1.211:8624/nuget/PStdev/\' -InstallationPolicy Trusted"'
@@ -38,4 +40,10 @@ pipeline {
 				}
 			}
 		}
+	
+	post {
+		always {
+			cleanWs()
+        }
+	}
 }
