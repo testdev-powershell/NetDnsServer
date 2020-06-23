@@ -19,7 +19,7 @@ pipeline {
 						sh 'git checkout testDEV'
 						sh 'git branch'
 					
-						// bat 'powershell.exe -Command "Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -By Build"'
+						bat 'powershell.exe -Command "Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -By Build"'
 					}
 				}
 			}
