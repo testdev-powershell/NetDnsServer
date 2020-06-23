@@ -30,12 +30,11 @@ pipeline {
 					}
 				}
 			}
-			
-			stage('Del WORKSPACE') {
-				steps {
-					cleanWs()
-				}
-			}
-
 		}
+	
+	post {
+		always {
+			cleanWs()
+        }
+	}
 }
