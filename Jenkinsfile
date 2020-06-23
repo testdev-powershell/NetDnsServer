@@ -28,7 +28,7 @@ pipeline {
 					bat 'powershell.exe -Command "Get-Module"'
 					bat 'powershell.exe -Command "Get-PSRepository"'
 					bat 'powershell.exe -Command "Get-PackageProvider | select -ExpandProperty Name"'
-					bat 'powershell.exe -Command "Copy-Item -Path C:\\Program Files\\PackageManagement\\ProviderAssemblies\\ -Destination $ENV:WORKSPACE -Recurse"'
+					bat 'powershell.exe -Command "Copy-Item -Path \'C:\\Program Files\\PackageManagement\\ProviderAssemblies\\\' -Destination $ENV:WORKSPACE -Recurse"'
 					powershell 'ls'
 					// bat 'powershell.exe -Command "Install-PackageProvider -Name "Nuget" -RequiredVersion "2.8.5.216" -Force"'
 					// bat 'powershell.exe -Command "Get-PackageProvider | select -ExpandProperty Name"'
