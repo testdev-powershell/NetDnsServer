@@ -11,7 +11,7 @@ pipeline {
 					powershell '''
 						Install-PackageProvider NuGet -Force
 						Import-PackageProvider NuGet -Force
-						Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+						Register-PSRepository -Name "PSGallery" -SourceLocation \'https://www.powershellgallery.com/api/v2/\' -InstallationPolicy Trusted
 						Get-PSRepository
 					'''
 					// bat 'powershell.exe -Command "Import-Module \'C:\\Program Files\\WindowsPowerShell\\Modules\\PowerShellGet\' -Force; Get-PSRepository | Unregister-PSRepository; Register-PSRepository -Name "PSGallery" -SourceLocation \'https://www.powershellgallery.com/api/v2/\' -InstallationPolicy Trusted; Get-PSRepository'
