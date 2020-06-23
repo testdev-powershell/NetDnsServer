@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+	environment {
+        PROGET_FEED_API_KEY = credentials('PStdevAPI')
+    }
 		stages {
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
@@ -13,12 +16,16 @@ pipeline {
 				}
 			}
 			
-			stage('DIRECTORY: local Git (switch to testDEV) // Step-ModuleVersion') {
+			stage('GIT tetDEV: Step-ModuleVersion') {
 				steps {
 					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
 						sh 'git checkout testDEV'
 						sh 'git branch'
-						powershell 'Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -by Build'
+						powershell '''
+							Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -by Build
+							"`n"
+							Test-ModuleManifest -Path .\\NetDnsServer\\NetDnsServer.psd1 | select Version
+						'''
 					}
 				}
 			}
@@ -26,21 +33,40 @@ pipeline {
 			stage('Deploy: ProGet') {
 				steps {
 					powershell '''
-						Install-PackageProvider NuGet -Force
-						Import-PackageProvider NuGet -Force
+						if (!(Get-PackageProvider NuGet)) { \
+							Install-PackageProvider NuGet -Force \
+							"`n"
+							Import-PackageProvider NuGet -Force \
+						}
+						"`n"
 						if (!(Get-PSRepository -Name PStdev)) { \
 							Register-PSRepository -Name PStdev -SourceLocation 'http://192.168.1.211:8624/nuget/PStdev/' -PublishLocation 'http://192.168.1.211:8624/nuget/PStdev/' -InstallationPolicy Trusted \
 						}
+						"`n"
 						Get-PSRepository | select -ExpandProperty Name
-						Publish-Module -Path C:\\testdev-powershell_GIT\\NetDnsServer\\NetDnsServer -NuGetApiKey InbJe8TKTerNDuUnIeW5 -Repository PStdev -Force -Confirm:$false
+						"`n"
+						Publish-Module -Path C:\\testdev-powershell_GIT\\NetDnsServer\\NetDnsServer -NuGetApiKey $PROGET_FEED_API_KEY -Repository PStdev -Force -Confirm:$false
+						"`n"
 						Find-Module -Repository PStdev
 					'''
 				}
 			}
 			
-			stage ('Test of previous Stage') {
+			stage ('GIT master: Merge/Push') {
 				steps {
-					powershell 'Get-PSRepository | select Name'
+					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
+						sh 'git checkout master'
+						sh 'git merge testDEV --no-commit'
+						sh 'git rm Jenkinsfile'
+						sh 'git add .'
+						sh 'git commit -m "removing Jenkinsfile from merge"'
+			
+						sshagent(['GITgpowers']) {
+							sh('git push origin master')
+						}
+						
+						sh 'git checkout testDEV'
+					}
 				}
 			}
 		}
