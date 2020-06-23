@@ -18,8 +18,7 @@ pipeline {
 					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
 						sh 'git checkout testDEV'
 						sh 'git branch'
-						
-						bat 'Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -by Build'
+						powershell 'Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -by Build'
 					}
 				}
 			}
