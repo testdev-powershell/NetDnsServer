@@ -15,7 +15,7 @@ pipeline {
 	
 			stage('Testing PSRepo') {
 				steps {
-					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Deploy'
+					powershell 'Get-Module'
 				}
 			}
 
