@@ -13,13 +13,21 @@ pipeline {
 				}
 			}
 			
-			stage('Step Module Manifest (by Build)') {
+			stage('DIRECTORY: local Git (switch to testDEV) // Step-ModuleVersion') {
 				steps {
 					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
 						sh 'git checkout testDEV'
 						sh 'git branch'
-					
-						bat 'powershell.exe -Command "Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -By Build"'
+						
+						bat 'Step-ModuleVersion -Path .\\NetDnsServer\\NetDnsServer.psd1 -by Build'
+					}
+				}
+			}
+			
+			stage('Deploy: ProGet') {
+				steps {
+					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
+						powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Deploy'
 					}
 				}
 			}
