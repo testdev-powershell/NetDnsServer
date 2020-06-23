@@ -25,9 +25,7 @@ pipeline {
 			
 			stage('Deploy: ProGet') {
 				steps {
-					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
-						bat 'powershell.exe -Command ".\\Build\\NetDnsServer_Build.ps1 -Task Deploy"'
-					}
+					bat 'powershell.exe -Command "C:\\testdev-powershell_GIT\\NetDnsServer\\Build\\NetDnsServer_Build.ps1 -Task Deploy"'
 				}
 			}
 		}
