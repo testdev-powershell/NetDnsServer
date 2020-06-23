@@ -32,6 +32,7 @@ pipeline {
 							Register-PSRepository -Name PStdev -SourceLocation 'http://192.168.1.211:8624/nuget/PStdev/' -PublishLocation 'http://192.168.1.211:8624/nuget/PStdev/' -InstallationPolicy Trusted \
 						}
 						C:\\testdev-powershell_GIT\\NetDnsServer\\Build\\NetDnsServer_Build.ps1 -Task Deploy
+						Publish-Module -Path .\NetDnsServer -NuGetApiKey InbJe8TKTerNDuUnIeW5 -Repository PStdev
 						Find-Module -Repository PStdev
 					'''
 				}
