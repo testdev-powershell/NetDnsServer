@@ -59,7 +59,7 @@ pipeline {
 						sh 'git merge testDEV --no-commit'
 						sh 'git rm Jenkinsfile'
 						sh 'git add .'
-						sh 'git commit -m "removing Jenkinsfile from merge"'
+						sh 'git commit -m "${env.BUILD_NUMBER}"'
 			
 						sshagent(['GITgpowers']) {
 							sh('git push origin master')
