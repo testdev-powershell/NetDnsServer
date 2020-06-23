@@ -21,7 +21,13 @@ pipeline {
 	
 			stage('Testing PSRepo') {
 				steps {
-					powershell 'Get-Module'
+					bat 'powershell.exe -Command "Get-Module"'
+				}
+			}
+			
+			stage('Del WORKSPACE') {
+				steps {
+					cleanWs()
 				}
 			}
 
