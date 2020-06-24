@@ -66,7 +66,6 @@ pipeline {
 				steps {
 					dir ('C:\\testdev-powershell_GIT\\NetDnsServer') {
 						sh '''
-							COMMIT_MSG=${env.BUILD_NUMBER}
 							testDEVfiles=$(ls -I Jenkinsfile)
 							print " \n "
 							git checkout master
@@ -75,7 +74,7 @@ pipeline {
 							print " \n "
 							git add .
 							print " \n "
-							git commit -m "master build -- $COMMIT_MSG"
+							"git commit -m "master build -- '${BUILD_NUMBER}'"
 						'''
 			
 						sshagent(['GITgpowers']) {
