@@ -44,14 +44,14 @@ pipeline {
 						"`n"
 						Get-PSRepository | select -ExpandProperty Name
 						"`n"
-						Publish-Module -Path C:\\testdev-powershell_GIT\\NetDnsServer\\NetDnsServer -NuGetApiKey ${PROGET_FEED_API_KEY} -Repository PStdev -Force -Confirm:$false
+						Publish-Module -Path C:\\testdev-powershell_GIT\\NetDnsServer\\NetDnsServer -NuGetApiKey ${env:PROGET_FEED_API_KEY} -Repository PStdev -Force -Confirm:$false
 						"`n"
 						Find-Module -Repository PStdev
 					'''
 				}
 			}
 			
-			stage ('GIT master: Merge/Push') {
+			stage ('GIT testDEV: Merge/Push') {
 				steps {
 					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
 						sh 'git add .'
@@ -60,7 +60,13 @@ pipeline {
 						sshagent(['GITgpowers']) {
 							sh('git push origin testDEV')
 						}
-						
+					}
+				}
+			}
+			
+			stage ('GIT master: Merge/Push') {
+				steps {
+					dir ('C:\\testdev-powershell_GIT\\NetDnsServer') {
 						sh 'git checkout master'
 						sh 'git merge testDEV --no-commit'
 						sh 'git rm Jenkinsfile'
