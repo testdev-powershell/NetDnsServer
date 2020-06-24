@@ -37,13 +37,11 @@ pipeline {
 							"`n"
 							Import-PackageProvider NuGet -Force \
 						}
-						"`n"
+						
 						if (!(Get-PSRepository -Name PStdev)) { \
 							Register-PSRepository -Name PStdev -SourceLocation 'http://192.168.1.211:8624/nuget/PStdev/' -PublishLocation 'http://192.168.1.211:8624/nuget/PStdev/' -InstallationPolicy Trusted \
 						}
-						"`n"
-						Get-PSRepository | select -ExpandProperty Name
-						"`n"
+						
 						Publish-Module -Path C:\\testdev-powershell_GIT\\NetDnsServer\\NetDnsServer -NuGetApiKey ${env:PROGET_FEED_API_KEY} -Repository PStdev -Force -Confirm:$false
 						"`n"
 						Find-Module -Repository PStdev
