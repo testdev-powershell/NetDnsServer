@@ -67,11 +67,13 @@ pipeline {
 			stage ('GIT master: Merge/Push') {
 				steps {
 					dir ('C:\\testdev-powershell_GIT\\NetDnsServer') {
-						sh 'testDEVfiles=$(ls -I Jenkinsfile)'
-						sh 'git checkout master'
-						sh 'git checkout testDEV $testDEVfiles'
-						sh 'git add .'
-						sh 'git commit -m "${env.BUILD_NUMBER}"'
+						sh '''
+							testDEVfiles=$(ls -I Jenkinsfile)
+							git checkout master
+							git checkout testDEV $testDEVfiles
+							git add .
+							"git commit -m '${env.BUILD_NUMBER}'"
+						'''
 			
 						sshagent(['GITgpowers']) {
 							sh('git push origin master')
