@@ -70,11 +70,7 @@ pipeline {
 							git checkout master
 							git checkout testDEV $testDEVfiles
 							git add .
-						'''
-						
-						powershell '''
-							$COMMIT_MSG = Get-Date
-							git commit -m "$COMMIT_MSG"
+							git commit -m "updating master from testDEV"
 						'''
 			
 						sshagent(['GITgpowers']) {
