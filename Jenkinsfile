@@ -1,5 +1,5 @@
 pipeline {
-	agent { label 'slave1' }
+	agent
 		stages {
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
@@ -82,4 +82,10 @@ pipeline {
 				}
 			}
 		}
+	
+	post {
+		always {
+			cleanWs()
+        }
+	}
 }
