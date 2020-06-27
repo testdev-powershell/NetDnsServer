@@ -1,4 +1,4 @@
-﻿Import-Module C:\Users\gpowers\Documents\WindowsPowerShell\Modules\NetDnsServer -WarningAction Ignore
+﻿Import-Module NetDnsServer -WarningAction Ignore
 
 Describe 'Basic Unit Test (Parameters)' {
     Context "Parameter Validation -- Query-NetDnsServer" {
