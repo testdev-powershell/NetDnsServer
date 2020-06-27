@@ -4,6 +4,7 @@ pipeline {
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
 					powershell '''
+						Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
 						Import-Module PSScriptAnalyzer
 						'.\\Build\\NetDnsServer_Build.ps1 -Task Analyze'
 					'''
