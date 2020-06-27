@@ -2,10 +2,11 @@ pipeline {
 	agent { label 'slave1' }
 		stages {
 			stage('TEST: PSScriptAnalyzer') {
+				node('slave1')
 				steps {
 					powershell '''
-						Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
-						Import-Module PSScriptAnalyzer
+						// Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
+						// Import-Module PSScriptAnalyzer
 						'.\\Build\\NetDnsServer_Build.ps1 -Task Analyze'
 					'''
 				}
