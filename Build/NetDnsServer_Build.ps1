@@ -8,19 +8,6 @@ $Task = 'default'
 
 $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
 
-if (!(Get-Module -Name PSScriptAnalyzer -ListAvailable)) {
-    Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force
-}
-if (!(Get-Module -Name Pester -ListAvailable)) {
-    Install-Module -Name Pester -Scope CurrentUser -Force -SkipPublisherCheck
-}
-if (!(Get-Module -Name psake -ListAvailable)) {
-    Install-Module -Name psake -Scope CurrentUser -Force
-}
-if (!(Get-Module -Name PSDeploy -ListAvailable)) {
-    Install-Module -Name PSDeploy -Scope CurrentUser -Force
-}
-
 Invoke-psake -buildFile "$PSScriptRoot\NetDnsServer_psakeBuild.ps1" -taskList $Task -Verbose:$VerbosePreference
 
 if ($psake.build_success -eq $false) {
