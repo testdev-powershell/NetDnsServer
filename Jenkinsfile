@@ -11,7 +11,8 @@ pipeline {
 						else { \
 							Import-Module -Name PSScriptAnalyzer \
 						}
-						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
+						Get-Module
+						// .\\Build\\NetDnsServer_Build.ps1 -Task Analyze
 					'''
 				}
 			}
