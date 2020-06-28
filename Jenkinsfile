@@ -4,7 +4,7 @@ pipeline {
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
 					powershell '''
-						if (!(Get-InstalledModule -Name PSScriptAnalyzer)) { Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force; Import-Module -Name PSScriptAnalyzer } else { Import-Module -Name PSScriptAnalyzer }
+						Uninstall-Module -Name PSScriptAnalyzer -Force -Confirm:$false
 						Get-InstalledModule
 					'''
 				}
