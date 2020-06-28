@@ -10,6 +10,7 @@ pipeline {
 			stage('TEST: Pester') {
 				steps {
 					powershell '''
+						Install-Module Pester -Scope CurrentUser -Force -SkipPublisherCheck
 						Import-Module Pester
 						.\\Build\\NetDnsServer_Build.ps1 -Task Test
 					'''
