@@ -1,16 +1,13 @@
 pipeline {
 	agent { label 'slave1' }
 		stages {
-			stage('TEST: PSScriptAnalyzer') {
+			stage('Install Modules') {
 				steps {
-					powershell '''
-						Uninstall-Module -Name PSScriptAnalyzer -Force -Confirm:$false
-						Get-InstalledModule
-					'''
+					powershell '.\\Helpers\\ModuleHelpers.ps1'
 				}
 			}
 			
-			stage ('Carryover Test') {
+			stage ('Get-Modules Test') {
 				steps {
 					powershell '''
 						Get-InstalledModule
@@ -19,10 +16,4 @@ pipeline {
 				}
 			}
 		}
-		
-	post {
-		always {
-			cleanWs()
-        }
-	}
 }
