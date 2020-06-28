@@ -3,7 +3,11 @@ pipeline {
 		stages {
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
-					powershell 'if (Get-InstalledModule -Name Pester) {Write-Host Pester}'
+					powershell '''
+						Uninstall-Module -Name BuildHelpers -Force -Confirm:$false
+						Uninstall-Module -Name Pester -Force -Confirm:$false
+						Uninstall-Module -Name PSScriptAnalyzer -Force -Confirm:$false
+						Get-InstalledModule
 				}
 			}
 		}
