@@ -11,7 +11,7 @@ pipeline {
 				steps {
 					powershell '''
 						Import-Module Pester
-						.\\Build\\NetDnsServer_Build.ps1 -Task Test'
+						.\\Build\\NetDnsServer_Build.ps1 -Task Test
 					'''
 				}
 			}
