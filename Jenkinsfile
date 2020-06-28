@@ -8,6 +8,7 @@ pipeline {
 						Uninstall-Module -Name Pester -Force -Confirm:$false
 						Uninstall-Module -Name PSScriptAnalyzer -Force -Confirm:$false
 						Get-InstalledModule
+					'''
 				}
 			}
 		}
