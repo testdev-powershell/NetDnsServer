@@ -61,7 +61,7 @@ pipeline {
 						sh 'git add .'
 						sh 'git commit -m "appending NetDnsServer.psd1 version update"'
 						
-						sshagent(['GITSlave1']) {
+						sshagent(['GITs1']) {
 							sh('git push origin testDEV')
 						}
 					}
