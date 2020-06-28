@@ -11,21 +11,5 @@ pipeline {
 					'''
 				}
 			}
-			
-			stage('Install Modules') {
-				steps {
-					powershell '.\\Helpers\\ModuleHelpers.ps1'
-				}
-			}
-			
-			stage ('Get-Modules Test') {
-				steps {
-					powershell '''
-						Get-InstalledModule
-						Get-PackageProvider
-						Get-Module | select Name
-					'''
-				}
-			}
 		}
 }
