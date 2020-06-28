@@ -3,7 +3,7 @@ pipeline {
 		stages {
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
-					powershell 'Get-InstalledModule'
+					powershell 'if (Get-InstalledModule -Name Pester) {Write-Host Pester}'
 				}
 			}
 		}
