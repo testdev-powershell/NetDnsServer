@@ -1,8 +1,4 @@
-﻿# If needed, install PowerShellGet and NuGet
-
-if (!(Get-InstalledModule -Name PowerShellGet -ErrorAction Ignore)) {
-    Install-Module -Name PowerShell -Scope CurrentUser -Force
-}
+﻿# If needed, install and NuGet
 
 if (!(Get-InstalledModule -Name NuGet -ErrorAction Ignore)) {
     Install-Module -Name NuGet -Scope CurrentUser -Force
@@ -21,7 +17,7 @@ if (!(Get-InstalledModule -Name BuildHelpers -ErrorAction Ignore)) {
 }
 
 if (!(Get-InstalledModule -Name Pester -ErrorAction Ignore)) {
-    Install-Module -Name Pester -Scope CurrentUser -Force
+    Install-Module -Name Pester -Scope CurrentUser -Force -SkipPublisherCheck
 }
 
 if (!(Get-InstalledModule -Name psake -ErrorAction Ignore)) {
