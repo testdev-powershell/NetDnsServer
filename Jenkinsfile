@@ -1,19 +1,6 @@
 pipeline {
 	agent { label 'slave1' }
 		stages {
-			stage ('Import Modules') {
-				steps {
-					powershell '''
-						Install-Module PSScriptAnalyzer -Force
-						Import-Module PSScriptAnalyzer
-						Install-Module Pester -Force -SkipPublisherCheck
-						Import-Module Pester
-						Install-Module BuildHelpers -Force
-						Import-Module BuildHelpers
-					'''
-				}
-			}
-			
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
 					powershell ''''
