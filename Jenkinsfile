@@ -5,7 +5,7 @@ pipeline {
 				agent { label 'slave1' }
 				steps {
 					powershell '''
-						'.\\Build\\NetDnsServer_Build.ps1 -Task Analyze'
+						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
 					'''
 				}
 			}
