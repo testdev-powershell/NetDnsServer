@@ -4,10 +4,17 @@ pipeline {
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
 					powershell '''
-						Uninstall-Module -Name BuildHelpers -Force -Confirm:$false
-						Uninstall-Module -Name Pester -Force -Confirm:$false
-						Uninstall-Module -Name PSScriptAnalyzer -Force -Confirm:$false
+						if (!(Get-InstalledModule -Name PSScriptAnalyzer)) { Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force; Import-Module -Name PSScriptAnalyzer } else { Import-Module -Name PSScriptAnalyzer }
 						Get-InstalledModule
+					'''
+				}
+			}
+			
+			stage ('Carryover Test') {
+				steps {
+					powershell '''
+						Get-InstalledModule
+						Get-Module
 					'''
 				}
 			}
