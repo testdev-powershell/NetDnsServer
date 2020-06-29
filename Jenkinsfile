@@ -20,6 +20,15 @@ pipeline {
 					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Analyze'
 				}
 			}
+			
+			stage ('test of module import') {
+				steps {
+					powershell '''
+						Import-Module NetDnsServer
+						Get-Module
+					'''
+				}
+			}
 		}
 		
 	post {
