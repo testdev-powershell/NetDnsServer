@@ -1,5 +1,5 @@
 pipeline {
-	agent { label 'slave1' }		
+	agent { label 'master' }		
 		stages {
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
