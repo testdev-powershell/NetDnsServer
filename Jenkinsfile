@@ -28,8 +28,6 @@ pipeline {
 				steps {
 					powershell '''
 						.\\Build\\NetDnsServer_Build.ps1 -Task Test
-						Get-InstalledModule
-						Get-Module
 					'''
 				}
 			}
