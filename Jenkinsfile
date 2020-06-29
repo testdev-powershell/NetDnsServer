@@ -16,8 +16,10 @@ pipeline {
 			
 			stage ('install the modules!') {
 				steps {
-					powershell '.\\Helpers\\ModuleHelpers.ps1'
-					Get-InstalledModule
+					powershell '''
+						.\\Helpers\\ModuleHelpers.ps1
+						Get-InstalledModule
+					'''
 				}
 			}
 			
