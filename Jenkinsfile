@@ -10,7 +10,7 @@ pipeline {
 			stage ('test of modules') {
 				steps {
 					powershell '''
-						Get-InstalledModule
+						Get-InstalledModule | fl *
 					'''
 				}
 			}
