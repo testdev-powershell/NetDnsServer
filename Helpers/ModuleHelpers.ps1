@@ -39,7 +39,3 @@ if (!(Get-InstalledModule -Name PSDeploy -ErrorAction Ignore)) {
 if (!(Get-InstalledModule -Name PSScriptAnalyzer -ErrorAction Ignore)) {
     Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force
 }
-
-if (!(Get-PackageProvider NuGet)) {
-    Install-PackageProvider NuGet -Force
-}
