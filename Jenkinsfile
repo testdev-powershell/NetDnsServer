@@ -21,7 +21,7 @@ pipeline {
 					powershell '''
 						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
 						"`n"
-						Get-InstalledModule | select Name | Out-File C:\testmod1.txt
+						Get-InstalledModule | select Name
 						Get-Module | select Name
 					'''
 				}
@@ -32,7 +32,7 @@ pipeline {
 					powershell '''
 						.\\Build\\NetDnsServer_Build.ps1 -Task Test
 						"`n"
-						Get-InstalledModule | select Name | Out-File C:\testmod1.txt -Append
+						Get-InstalledModule | select Name
 						Get-Module | select Name
 					'''
 				}
