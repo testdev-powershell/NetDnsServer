@@ -20,7 +20,8 @@ pipeline {
 				steps {
 					powershell '''
 						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
-						Get-InstalledModule | select Name
+						Get-InstalledModule
+						Get-Module
 					'''
 				}
 			}
@@ -30,8 +31,8 @@ pipeline {
 					powershell '''
 						.\\Build\\NetDnsServer_Build.ps1 -Task Test
 						"`n"
-						Get-InstalledModule | select Name
-						Get-Module | select Name
+						Get-InstalledModule
+						Get-Module
 					'''
 				}
 			}
