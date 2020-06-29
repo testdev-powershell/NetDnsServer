@@ -8,9 +8,11 @@ pipeline {
 			}
 			
 			stage ('test of modules') {
-				powershell '''
-					Get-InstalledModule
-				'''
+				steps {
+					powershell '''
+						Get-InstalledModule
+					'''
+				}
 			}
 		}
 		
