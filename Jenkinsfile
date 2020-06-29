@@ -6,7 +6,7 @@ pipeline {
 					powershell '.\\Helpers\\ModuleHelpers.ps1'
 				}
 			}
-		
+		}
 	post {
 		always {
 			cleanWs()
