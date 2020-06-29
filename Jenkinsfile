@@ -21,14 +21,20 @@ pipeline {
 					powershell '''
 						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
 						"`n"
-						Get-InstalledModule
+						Get-InstalledModule | select Name | Out-File C:\testmod1.txt
+						Get-Module | select Name
 					'''
 				}
 			}
 			
 			stage('TEST: Pester') {
 				steps {
-					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Test'
+					powershell '''
+						.\\Build\\NetDnsServer_Build.ps1 -Task Test
+						"`n"
+						Get-InstalledModule | select Name | Out-File C:\testmod1.txt -Append
+						Get-Module | select Name
+					'''
 				}
 			}
 		}
