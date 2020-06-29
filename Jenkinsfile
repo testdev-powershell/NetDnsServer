@@ -18,7 +18,7 @@ pipeline {
 				}
 			}
 			
-			stage('Install Modules') {
+			stage('Check Modules') {
 				steps {
 					powershell '''
 						Get-InstalledModule
