@@ -12,12 +12,17 @@ pipeline {
 						"`n"
 						Get-Module
 					'''
+					// no modules found here!
 				}
 			}
 			
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
-					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Analyze'
+					powershell '''
+						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
+						"`n"
+						Get-InstalledModule
+					'''
 				}
 			}
 			
