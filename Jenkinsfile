@@ -1,18 +1,24 @@
 pipeline {
 	agent { label 'master' }		
 		stages {
+			stage ('removing modules') {
+				steps {
+					powershell '''
+						Uninstall-Module BuildHelpers -Force -Confirm:$false
+						Uninstall-Module NetDnsServer -Force -Confirm:$false
+						Uninstall-Module NuGet -Force -Confirm:$false
+						Uninstall-Module Pester -Force -Confirm:$false
+						Uninstall-Module psake -Force -Confirm:$false
+						Uninstall-Module PSDeploy -Force -Confirm:$false
+						Uninstall-Module PSScriptAnalyzer -Force -Confirm:$false
+					'''
+				}
+			}
+			
 			stage('Install Modules') {
 				steps {
 					powershell '''
-						Write-Host "Getting modules"
 						Get-Module
-						Write-Host "Getting installed modules"
-						Get-InstalledModule
-						Write-Host "Installing modules"
-						.\\Helpers\\ModuleHelpers.ps1
-						Write-Host "getting modules after"
-						Get-Module
-						Write-Host "getting installed modules"
 						Get-InstalledModule
 					'''
 				}
