@@ -33,14 +33,18 @@ pipeline {
 			}
 			
 			stage ('GIT testDEV: Merge/Push') {
+				environment {
+					GIT_AUTH = credentials('httpGit')
+				}
 				steps {
 					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
 						sh 'git add .'
 						sh 'git commit -m "appending NetDnsServer.psd1 version update"'
 						
-						sshagent(['GITgpowers']) {
-							sh('git push origin testDEV')
-						}
+						sh('''
+							git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
+							git push origin testDEV
+						''')
 					}
 				}
 			}
