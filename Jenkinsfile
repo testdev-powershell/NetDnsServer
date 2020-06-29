@@ -7,6 +7,10 @@ pipeline {
 						$env:USERNAME
 						$env:USERPROFILE
 						whoami
+						"`n"
+						Get-InstalledModule | select Name
+						"`n"
+						Get-Module
 					'''
 				}
 			}
