@@ -1,6 +1,16 @@
 pipeline {
 	agent { label 'master' }		
 		stages {
+			stage('TEST: user') {
+				steps {
+					powershell '''
+						$env:USERNAME
+						$env:USERPROFILE
+						whoami
+					'''
+				}
+			}
+			
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
 					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Analyze'
