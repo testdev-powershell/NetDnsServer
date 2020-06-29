@@ -33,6 +33,9 @@ pipeline {
 			}
 			
 			stage ('GIT testDEV: Merge/Push') {
+				environment {
+					GIT_AUTH = credentials('httpGit')
+				}
 				steps {
 					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
 						sh 'git add .'
