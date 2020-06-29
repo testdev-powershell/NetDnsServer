@@ -7,9 +7,7 @@ pipeline {
 						$env:USERNAME
 						$env:USERPROFILE
 						whoami
-						"`n"
-						Get-InstalledModule | select Name
-						"`n"
+						Get-InstalledModule
 						Get-Module
 					'''
 					// no modules found here!
