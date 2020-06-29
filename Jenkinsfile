@@ -3,7 +3,7 @@ pipeline {
 		stages {
 			stage('Install Modules') {
 				steps {
-					powershell '.\\Helpers\\ModuleHelpers.ps1'
+					sh 'whoami'
 				}
 			}
 			
