@@ -1,28 +1,15 @@
 pipeline {
 	agent { label 'slave1' }		
 		stages {
-			stage('Install Modules') {
+			stage('TEST: PSScriptAnalyzer') {
 				steps {
-					powershell '''
-						Write-Host "Getting installed modules"
-						"`n"
-						Get-InstalledModule
-						"`n"
-						Write-Host "Installing modules"
-						.\\Helpers\\ModuleHelpers.ps1
-						"`n"
-						Write-Host "getting installed modules"
-						"`n"
-						Get-InstalledModule
-					'''
+					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Analyze'
 				}
 			}
 			
-			stage('Check Modules') {
+			stage('TEST: Pester') {
 				steps {
-					powershell '''
-						Get-InstalledModule
-					'''
+					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Test'
 				}
 			}
 		}
