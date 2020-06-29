@@ -11,7 +11,7 @@ pipeline {
 				steps {
 					powershell '''
 						Get-Module
-						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze'
+						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
 						Get-Module
 					'''
 				}
@@ -21,7 +21,7 @@ pipeline {
 				steps {
 					powershell '''
 						Get-Module
-						.\\Build\\NetDnsServer_Build.ps1 -Task Test'
+						.\\Build\\NetDnsServer_Build.ps1 -Task Test
 						Get-Module
 					'''
 				}
