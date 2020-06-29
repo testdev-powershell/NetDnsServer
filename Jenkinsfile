@@ -14,6 +14,13 @@ pipeline {
 				}
 			}
 			
+			stage ('install the modules!') {
+				steps {
+					powershell '.\\Helpers\ModuleHelpers.ps1'
+					Get-InstalledModule
+				}
+			}
+			
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
 					powershell '''
