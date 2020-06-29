@@ -21,12 +21,9 @@ pipeline {
 				}
 			}
 			
-			stage ('test of module import') {
+			stage('TEST: Pester') {
 				steps {
-					powershell '''
-						Import-Module NetDnsServer
-						Get-Module
-					'''
+					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Test'
 				}
 			}
 		}
