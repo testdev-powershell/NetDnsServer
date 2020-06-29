@@ -13,7 +13,6 @@ task Analyze {
 }
 
 task Test {
-    Import-Module Pester
     $testResults = Invoke-Pester -Path "$PSScriptRoot\..\Tests\" -Show All -PassThru -WarningAction SilentlyContinue
     if ($testResults.FailedCount -gt 0) {
         $testResults | Format-List
