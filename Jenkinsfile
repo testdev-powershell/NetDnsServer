@@ -32,22 +32,15 @@ pipeline {
 				}
 			}
 			
-			stage ('GIT master: Merge/Push') {
+			stage ('GIT testDEV: Merge/Push') {
 				steps {
-					dir ('C:\\testdev-powershell_GIT\\NetDnsServer') {
-						sh '''
-							testDEVfiles=$(ls -I Jenkinsfile)
-							git checkout master
-							git checkout testDEV $testDEVfiles
-							git add .
-							git commit -m "updating master from testDEV"
-						'''
-			
-						sshagent(['GITgpowers']) {
-							sh('git push origin master')
-						}
+					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
+						sh 'git add .'
+						sh 'git commit -m "appending NetDnsServer.psd1 version update"'
 						
-						sh 'git checkout testDEV'
+						sshagent(['GITgpowers']) {
+							sh('git push origin testDEV')
+						}
 					}
 				}
 			}
