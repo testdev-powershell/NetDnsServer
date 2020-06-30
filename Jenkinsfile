@@ -10,6 +10,7 @@ pipeline {
 						$env:HOMEDRIVE
 						whoami
 						Get-InstalledModule
+					'''
 				}
 			}
 			
