@@ -14,16 +14,29 @@ pipeline {
 				}
 			}
 			
-			stage ('removing modules') {
+			stage ('Install Modules if needed') {
 				steps {
 					powershell '''
-						Uninstall-Module BuildHelpers -Force -Confirm:$false
-						Uninstall-Module NetDnsServer -Force -Confirm:$false
-						Uninstall-Module NuGet -Force -Confirm:$false
-						Uninstall-Module Pester -Force -Confirm:$false
-						Uninstall-Module psake -Force -Confirm:$false
-						Uninstall-Module PSDeploy -Force -Confirm:$false
-						Uninstall-Module PSScriptAnalyzer -Force -Confirm:$false
+						.\\Helpers\\ModuleHelpers.ps1
+						Get-InstalledModule
+					'''
+				}
+			}
+			
+			stage('TEST: PSScriptAnalyzer') {
+				steps {
+					powershell '''
+						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
+						Get-Module
+					'''
+				}
+			}
+			
+			stage('TEST: Pester') {
+				steps {
+					powershell '''
+						.\\Build\\NetDnsServer_Build.ps1 -Task Test
+						Get-Module
 					'''
 				}
 			}
