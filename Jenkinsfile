@@ -25,7 +25,10 @@ pipeline {
 			
 			stage('TEST: PSScriptAnalyzer') {
 				steps {
-					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Analyze'
+					powershell '''
+						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
+						Get-Module
+					'''
 				}
 			}
 		}
