@@ -17,28 +17,8 @@ pipeline {
 			stage ('Remove-Modules') {
 				steps {
 					powershell '''
-						.\\Helpers\\ModuleHelpers.ps1
 						Get-InstalledModule
 					'''
 				}
 			}
-			
-			stage('TEST: PSScriptAnalyzer') {
-				steps {
-					powershell '''
-						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
-						Get-InstalledModule
-						Get-Module
-					'''
-				}
-			}
-			
-			stage('TEST: Pester') {
-				steps {
-					powershell '''
-						.\\Build\\NetDnsServer_Build.ps1 -Task Test
-					'''
-				}
-			}
-		}
 }
