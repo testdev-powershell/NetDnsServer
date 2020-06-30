@@ -6,6 +6,8 @@ pipeline {
 					powershell '''
 						$env:USERNAME
 						$env:USERPROFILE
+						$env:HOMEPATH
+						$env:HOMEDRIVE
 						whoami
 						Get-InstalledModule
 						Get-Module
