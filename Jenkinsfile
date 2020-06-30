@@ -54,7 +54,7 @@ pipeline {
 				}
 			}
 						
-			stage ('GIT master: Merge/Push') {
+			stage ('GIT testDEV: Merge/Push') {
 				steps {
 					dir('C:\\testdev-powershell_GIT\\NetDnsServer') {
 						sh 'git add .'
