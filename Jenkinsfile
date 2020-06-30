@@ -10,10 +10,6 @@ pipeline {
 						$env:HOMEDRIVE
 						whoami
 						Get-InstalledModule
-						Get-Module
-						$env:PSModulePath
-					'''
-					// no modules found here!
 				}
 			}
 			
@@ -23,6 +19,12 @@ pipeline {
 						.\\Helpers\\ModuleHelpers.ps1
 						Get-InstalledModule
 					'''
+				}
+			}
+			
+			stage('TEST: PSScriptAnalyzer') {
+				steps {
+					powershell '.\\Build\\NetDnsServer_Build.ps1 -Task Analyze'
 				}
 			}
 		}
