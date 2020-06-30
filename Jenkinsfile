@@ -1,7 +1,7 @@
 pipeline {
 	agent { label 'master' }		
 		stages {
-			stage('TEST: user') {
+			stage('TEST: user info') {
 				steps {
 					powershell '''
 						$env:USERNAME
@@ -13,7 +13,7 @@ pipeline {
 				}
 			}
 			
-			stage ('Remove-Modules') {
+			stage ('Install Modules if needed') {
 				steps {
 					powershell '''
 						.\\Helpers\\ModuleHelpers.ps1
