@@ -1,5 +1,5 @@
 pipeline {
-	agent { label 'master' }		
+	agent { label 'slave1' }		
 		stages {
 			stage('TEST: user info') {
 				steps {
@@ -14,29 +14,16 @@ pipeline {
 				}
 			}
 			
-			stage ('Install Modules if needed') {
+			stage ('removing modules') {
 				steps {
 					powershell '''
-						.\\Helpers\\ModuleHelpers.ps1
-						Get-InstalledModule
-					'''
-				}
-			}
-			
-			stage('TEST: PSScriptAnalyzer') {
-				steps {
-					powershell '''
-						.\\Build\\NetDnsServer_Build.ps1 -Task Analyze
-						Get-Module
-					'''
-				}
-			}
-			
-			stage('TEST: Pester') {
-				steps {
-					powershell '''
-						.\\Build\\NetDnsServer_Build.ps1 -Task Test
-						Get-Module
+						Uninstall-Module BuildHelpers -Force -Confirm:$false
+						Uninstall-Module NetDnsServer -Force -Confirm:$false
+						Uninstall-Module NuGet -Force -Confirm:$false
+						Uninstall-Module Pester -Force -Confirm:$false
+						Uninstall-Module psake -Force -Confirm:$false
+						Uninstall-Module PSDeploy -Force -Confirm:$false
+						Uninstall-Module PSScriptAnalyzer -Force -Confirm:$false
 					'''
 				}
 			}
