@@ -23,6 +23,7 @@ pipeline {
 						Uninstall-Module -Name PSDeploy -Force -Confirm:$false
 						Uninstall-Module -Name Pester -Force -Confirm:$false
 						Uninstall-Module -Name NetDnsServer -Force -Confirm:$false
+						Uninstall-Module -Name PSScriptAnalyzer -Force -Confirm:$false
 						Get-InstalledModule
 					'''
 				}
