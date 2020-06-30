@@ -7,7 +7,7 @@ if (!(Get-InstalledModule -Name NuGet -ErrorAction Ignore)) {
 # If needed, install the NuGet package provider
 
 if (!(Get-PackageProvider NuGet)) {
-    Install-PackageProvider NuGet -Force
+    Install-PackageProvider NuGet -Scope CurrentUser -Force
 }
 
 # If needed, install all modules needed for this pipeline project
