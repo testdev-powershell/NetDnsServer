@@ -1,5 +1,5 @@
 pipeline {
-	agent { label 'slave1' }		
+	agent { label 'master' }		
 		stages {
 			stage('TEST: user') {
 				steps {
@@ -20,6 +20,7 @@ pipeline {
 			stage ('Remove-Modules') {
 				steps {
 					powershell '''
+						.\\Helpers\\ModuleHelpers.ps1
 						Get-InstalledModule
 					'''
 				}
