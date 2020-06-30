@@ -7,13 +7,21 @@ if (!(Get-InstalledModule -Name NuGet -ErrorAction Ignore)) {
 # If needed, install the NuGet package provider
 
 if (!(Get-PackageProvider NuGet)) {
-    Install-PackageProvider NuGet -Force
+    Install-PackageProvider NuGet -Scope CurrentUser -Force
 }
 
 # If needed, install all modules needed for this pipeline project
 
 if (!(Get-InstalledModule -Name BuildHelpers -ErrorAction Ignore)) {
     Install-Module -Name BuildHelpers -Scope CurrentUser -Force
+}
+
+if (!(Get-PSRepository -Name PStdev)) {
+    Register-PSRepository -Name PStdev -SourceLocation 'http://192.168.1.211:8624/nuget/PStdev/' -PublishLocation 'http://192.168.1.211:8624/nuget/PStdev/' -InstallationPolicy Trusted
+}
+
+if (!(Get-InstalledModule -Name NetDnsServer -ErrorAction Ignore)) {
+    Install-Module -Name NetDnsServer -Repository PStdev -Scope CurrentUser -Force
 }
 
 if (!(Get-InstalledModule -Name Pester -ErrorAction Ignore)) {
@@ -30,8 +38,4 @@ if (!(Get-InstalledModule -Name PSDeploy -ErrorAction Ignore)) {
 
 if (!(Get-InstalledModule -Name PSScriptAnalyzer -ErrorAction Ignore)) {
     Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force
-}
-
-if (!(Get-PackageProvider NuGet)) {
-    Install-PackageProvider NuGet -Force
 }
