@@ -66,6 +66,29 @@ pipeline {
 					}
 				}
 			}
+			
+			stage('Deploy: ProGet') {
+				environment {
+						PROGET_FEED_API_KEY = credentials('PStdevAPI')
+				}
+				steps {
+					powershell '''
+						if (!(Get-PackageProvider NuGet)) { \
+							Install-PackageProvider NuGet -Force \
+							"`n"
+							Import-PackageProvider NuGet -Force \
+						}
+						
+						if (!(Get-PSRepository -Name PStdev)) { \
+							Register-PSRepository -Name PStdev -SourceLocation 'http://192.168.1.211:8624/nuget/PStdev/' -PublishLocation 'http://192.168.1.211:8624/nuget/PStdev/' -InstallationPolicy Trusted \
+						}
+						
+						Publish-Module -Path C:\\testdev-powershell_GIT\\NetDnsServer\\NetDnsServer -NuGetApiKey ${env:PROGET_FEED_API_KEY} -Repository PStdev -Force -Confirm:$false
+						"`n"
+						Find-Module -Repository PStdev
+					'''
+				}
+			}
 		}
 	post {
 		always {
