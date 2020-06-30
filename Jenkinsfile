@@ -9,6 +9,7 @@ pipeline {
 						whoami
 						Get-InstalledModule
 						Get-Module
+						$env:PSModulePath
 					'''
 					// no modules found here!
 				}
