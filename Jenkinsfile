@@ -17,6 +17,7 @@ pipeline {
 			stage ('Remove-Modules') {
 				steps {
 					powershell '''
+						.\\Helpers\\ModuleHelpers.ps1
 						Get-InstalledModule
 					'''
 				}
