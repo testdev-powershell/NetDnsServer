@@ -14,10 +14,15 @@ pipeline {
 				}
 			}
 			
-			stage ('install the modules!') {
+			stage ('Remove-Modules') {
 				steps {
 					powershell '''
-						.\\Helpers\\ModuleHelpers.ps1
+						Uninstall-Module -Name NuGet -Force -Confirm:$false
+						Uninstall-Module -Name BuildHelpers -Force -Confirm:$false
+						Uninstall-Module -Name psake -Force -Confirm:$false
+						Uninstall-Module -Name PSDeploy -Force -Confirm:$false
+						Uninstall-Module -Name Pester -Force -Confirm:$false
+						Uninstall-Module -Name NetDnsServer -Force -Confirm:$false
 						Get-InstalledModule
 					'''
 				}
